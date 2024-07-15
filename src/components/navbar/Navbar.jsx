@@ -6,7 +6,7 @@ const Navbar = () => {
   const location = useLocation();
 
   return (
-    <div className="flex border-2 space-x-6 items-center pl-4 py-3">
+    <div className="flex space-x-6 items-center pl-4 py-3 sticky top-0 bg-gray-800 text-white z-10">
       <img src={movieIcon} alt="movieIcon" className="w-[35px]" />
       <Link
         to="/"
@@ -14,7 +14,7 @@ const Navbar = () => {
           ${
             location.pathname === "/"
               ? "text-blue-500"
-              : "text-gray-500"
+              : "text-white"
           }`
         }
       >
@@ -29,7 +29,7 @@ const Navbar = () => {
           ${
             location.pathname === "/watchlist"
               ? "text-blue-500"
-              : "text-gray-500"
+              : "text-white"
           }`
         }
       >
