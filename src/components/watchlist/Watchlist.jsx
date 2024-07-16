@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Watchlist = () => {
+const Watchlist = ({watchlist}) => {
   return (
     <>
 
@@ -29,22 +29,29 @@ const Watchlist = () => {
           </thead>
 
           <tbody>
-            <tr className='border-b-2'>
-              <td className='flex items-center px-4 py-2'>
-                <img className='h-[5rem] w-[8rem]' src={`https://images.pexels.com/photos/26793685/pexels-photo-26793685/free-photo-of-a-dog-in-a-field.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load`} />
 
-                <div className='mx-10'>
-                  The Matrix
-                </div>
-              </td>
+            {watchlist.map((movieObj) => {
+              return (
+                  <tr className='border-b-2'>
+                  <td className='flex items-center px-4 py-2'>
+                    <img className='h-[5rem] w-[8rem]' src={`https://image.tmdb.org/t/p/original/${movieObj.poster_path}`} />
+    
+                    <div className='mx-10'>
+                      {movieObj.title}
+                    </div>
+                  </td>
+    
+                  <td> {movieObj.vote_average.toFixed(1)} </td>
+                  <td> {movieObj.popularity.toFixed(2)} </td>
+                  <td>Action</td>
+    
+                  <td className='text-red-700'>Delete</td>
+    
+                </tr>
+              )
+            })}
 
-              <td>8</td>
-              <td>9</td>
-              <td>Action</td>
 
-              <td className='text-red-700'>Delete</td>
-
-            </tr>
           </tbody>
 
         </table>
