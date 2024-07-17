@@ -3,6 +3,7 @@ import './App.css'
 import Navbar from './components/navbar/index'
 import { Banner, Movies, Watchlist } from './components/index'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Footer from './components/footer/Footer'
 
 function App() {
   let [watchlist, setWatchList] = useState([])
@@ -48,6 +49,8 @@ function App() {
                   handleRemoveFromWatchlist={handleRemoveFromWatchlist}
                   watchlist={watchlist}
                 />
+
+                <Footer />
               </>
             }
           />

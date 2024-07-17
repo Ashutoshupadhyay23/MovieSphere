@@ -2,7 +2,7 @@ import React from 'react';
 
 const Pagination = ({ pageNo, totalPages, handlePrev, handleNext, loading }) => {
   return (
-    <div className="flex justify-center mt-5 w-full">
+    <div className="flex justify-center mt-10 w-full">
       {loading ? (
         <div className="flex items-center">
           <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-900 mr-2"></div>
@@ -35,7 +35,7 @@ const Pagination = ({ pageNo, totalPages, handlePrev, handleNext, loading }) => 
           </button>
         </>
       )}
-     
+
     </div>
   );
 };
