@@ -17,7 +17,7 @@ const Movies = ({ handleAddToWatchlist, handleRemoveFromWatchlist, watchlist }) 
   const fetchMovies = (page) => {
     setLoading(true);
     setError(null);
-    axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=eb1cc76a6cbe2625542a78deed514da1&language=en-US&page=${page}`)
+    axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${import.meta.env.VITE_MOVIE_API_KEY}&language=en-US&page=${page}`)
       .then(function (res) {
         setMovies(res.data.results);
         setTotalPages(res.data.total_pages);
