@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import genreIds from '../../utility/GenreNames'
 
 const Watchlist = ({watchlist, setWatchList}) => {
 
@@ -50,13 +51,13 @@ const Watchlist = ({watchlist, setWatchList}) => {
             <tr className='h-10'>
               <th>Name</th>
               <th className='flex justify-center'>
-                <div onClick={sortByAscendingOrder} className='p-2 hover:cursor-pointer'>
+                <span onClick={sortByAscendingOrder} className='p-2 hover:cursor-pointer'>
                   <i className="fa-solid fa-arrow-up"></i>
-                </div>
-                <th className='p-2'>Ratings</th>
-                <div onClick={sortByDescendingOrder} className='p-2 hover:cursor-pointer'>
-                  <i class="fa-solid fa-arrow-down"></i>
-                </div>
+                </span>
+                <span className='p-2'>Ratings</span>
+                <span onClick={sortByDescendingOrder} className='p-2 hover:cursor-pointer'>
+                  <i className="fa-solid fa-arrow-down"></i>
+                </span>
               </th>
               <th>Popularity</th>
               <th>Genre</th>
@@ -68,11 +69,11 @@ const Watchlist = ({watchlist, setWatchList}) => {
 
             {watchlist.filter((movieObj) => {
               return movieObj.title.toLowerCase().includes(search.toLocaleLowerCase())
-            }).map((movieObj) => {
+            }).map((movieObj, index) => {
               return (
-                  <tr className='border-b-2'>
+                <tr key={index} className='border-b-2'>
                   <td className='flex items-center px-4 py-2'>
-                    <img className='h-[5rem] w-[8rem] bg-cover rounded-md' src={`https://image.tmdb.org/t/p/original/${movieObj.poster_path}`} />
+                    <img className='h-[5rem] w-[8rem] bg-cover rounded-md' src={`https://image.tmdb.org/t/p/original/${movieObj.poster_path}`} alt={movieObj.title} />
     
                     <div className='mx-10'>
                       {movieObj.title}
@@ -81,10 +82,9 @@ const Watchlist = ({watchlist, setWatchList}) => {
     
                   <td> {movieObj.vote_average.toFixed(1)} </td>
                   <td> {movieObj.popularity.toFixed(2)} </td>
-                  <td>Action</td>
+                  <td> {genreIds[movieObj.genre_ids[0]]} </td>
     
                   <td className='text-red-700'>Delete</td>
-    
                 </tr>
               )
             })}
