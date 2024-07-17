@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import Navbar from './components/navbar/index'
 import { Banner, Movies, Watchlist } from './components/index'
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
   let [watchlist, setWatchList] = useState([])
@@ -16,16 +16,17 @@ function App() {
 
   let handleRemoveFromWatchlist = (movieObj) => {
     let filteredWatchlist = watchlist.filter((movie) => {
-      return movie.id != movieObj.id
+      return movie.id !== movieObj.id
     })
 
     setWatchList(filteredWatchlist)
     console.log(filteredWatchlist);
+    localStorage.setItem('movieLists', JSON.stringify(filteredWatchlist));
   }
 
   useEffect(() => {
     let moviesFromLocalStorage = localStorage.getItem('movieLists')
-    if(!moviesFromLocalStorage) {
+    if (!moviesFromLocalStorage) {
       return
     }
     setWatchList(JSON.parse(moviesFromLocalStorage))
@@ -36,34 +37,34 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route 
-            path='/' 
-            element={ 
-              <> 
-                <Banner /> 
+          <Route
+            path='/'
+            element={
+              <>
+                <Banner />
 
-                <Movies 
-                  handleAddToWatchlist={handleAddToWatchlist} 
+                <Movies
+                  handleAddToWatchlist={handleAddToWatchlist}
                   handleRemoveFromWatchlist={handleRemoveFromWatchlist}
                   watchlist={watchlist}
                 />
               </>
-            } 
+            }
           />
 
-          <Route 
-            path='/watchlist' 
-            element={ 
-              < Watchlist 
+          <Route
+            path='/watchlist'
+            element={
+              < Watchlist
                 watchlist={watchlist}
                 setWatchList={setWatchList}
-              /> 
-            } 
+              />
+            }
           />
 
         </Routes>
       </BrowserRouter>
-      
+
     </>
   )
 }
