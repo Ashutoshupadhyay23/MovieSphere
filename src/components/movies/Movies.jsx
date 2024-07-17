@@ -66,7 +66,7 @@ const Movies = ({handleAddToWatchlist, handleRemoveFromWatchlist, watchlist}) =>
 
                 <MovieCard 
                   poster_path={movieObj.poster_path} 
-                  name={movieObj.original_title} 
+                  name={movieObj.title} 
                   handleAddToWatchlist = {handleAddToWatchlist} 
                   movieObj={movieObj} 
                   handleRemoveFromWatchlist={handleRemoveFromWatchlist}
