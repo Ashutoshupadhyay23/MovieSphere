@@ -1,11 +1,25 @@
 import React, { useState } from 'react'
 
-const Watchlist = ({watchlist}) => {
+const Watchlist = ({watchlist, setWatchList}) => {
 
   const [search, setSearch] = useState('')
 
   const handleSearch = (e) => {
     setSearch(e.target.value)
+  }
+
+  const sortByAscendingOrder = () => {
+    let sortedByIncreasing =  watchlist.sort((movieA, movieB) => {
+      return movieA.vote_average - movieB.vote_average
+    })
+    setWatchList([...sortedByIncreasing])
+  }
+
+  const sortByDescendingOrder = () => {
+    let sortedByDecresing = watchlist.sort((movieA, movieB) => {
+      return movieB.vote_average - movieA.vote_average
+    })
+    setWatchList([...sortedByDecresing])
   }
 
   return (
@@ -33,9 +47,17 @@ const Watchlist = ({watchlist}) => {
       <div className='border border-gray-100 m-6 overflow-hidden rounded-lg'>
         <table className='w-full text-gray-500 text-center'>
           <thead className='border-b-2'>
-            <tr className='h-9'>
+            <tr className='h-10'>
               <th>Name</th>
-              <th>Ratings</th>
+              <th className='flex justify-center'>
+                <div onClick={sortByAscendingOrder} className='p-2 hover:cursor-pointer'>
+                  <i className="fa-solid fa-arrow-up"></i>
+                </div>
+                <th className='p-2'>Ratings</th>
+                <div onClick={sortByDescendingOrder} className='p-2 hover:cursor-pointer'>
+                  <i class="fa-solid fa-arrow-down"></i>
+                </div>
+              </th>
               <th>Popularity</th>
               <th>Genre</th>
               <th>Action</th>
