@@ -50,7 +50,7 @@ const Watchlist = ({ watchlist, setWatchList }) => {
           <div
             key={index}
             onClick={() => handleFilter(genre)}
-            className={`flex justify-center h-[2.5rem] w-[6rem] rounded-xl text-white font-medium items-center mx-2 hover:cursor-pointer ${currGenre === genre ? 'bg-blue-400' : 'bg-gray-400/50'
+            className={`flex justify-center h-[2.5rem] w-[6rem] rounded-xl text-white font-medium items-center mx-2 my-2 hover:cursor-pointer ${currGenre === genre ? 'bg-blue-400' : 'bg-gray-400/50'
               }`}
           >
             {genre}
