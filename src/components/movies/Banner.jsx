@@ -13,7 +13,7 @@ const Banner = () => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % posters.length);
     }, 5000); 
-    
+
     return () => clearInterval(interval);
   }, [posters]);
 
@@ -41,7 +41,7 @@ const Banner = () => {
   
 
   return (
-    <div className='relative h-[30vh] md:h-[70vh] overflow-hidden rounded-sm'>
+    <div className='relative h-[30vh] md:h-[70vh] overflow-hidden rounded-sm z-0'>
       <div
         className='absolute inset-0 bg-cover bg-center z-10 transition-opacity duration-500 ease-in-out'
         style={{
