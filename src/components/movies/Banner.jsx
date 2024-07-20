@@ -1,13 +1,59 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Banner = () => {
+  const [posters, setPosters] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    fetchPosters();
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % posters.length);
+    }, 5000); 
+    
+    return () => clearInterval(interval);
+  }, [posters]);
+
+  const fetchPosters = () => {
+    axios
+      .get(`https://api.themoviedb.org/3/movie/popular?api_key=${import.meta.env.VITE_MOVIE_API_KEY}&language=en-US`)
+      .then((res) => {
+        const fetchedPosters = res.data.results.map((movie) => ({
+          title: movie.title,
+          backdropPath: movie.backdrop_path,
+        }));
+        setPosters(fetchedPosters);
+      })
+      .catch((error) => {
+        console.error('Error fetching movie posters:', error);
+      });
+  };
+
+  if (posters.length === 0) {
+    return null; // Render nothing if posters are not fetched yet
+  }
+
+  const currentPoster = posters[currentIndex];
+  const backgroundImage = `https://image.tmdb.org/t/p/original${currentPoster.backdropPath}`;
+  
+
   return (
-    <div className='h-[20vh] md:h-[70vh] bg-cover bg-center flex items-end' style={{ backgroundImage: `url(https://m.media-amazon.com/images/S/aplus-media/sota/c9e84ba5-b727-41cc-8563-a29b54b74f50.__CR0,0,970,300_PT0_SX970_V1___.jpg)` }}>
-
-      <div className='text-white text-xl text-center w-full bg-blue-900/60 p-2'>Avengers endgame</div>
-
+    <div className='relative h-[30vh] md:h-[70vh] overflow-hidden rounded-sm'>
+      <div
+        className='absolute inset-0 bg-cover bg-center z-10 transition-opacity duration-500 ease-in-out'
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+          opacity: 1,
+        }}
+      ></div>
+      <div className='absolute inset-0 bg-gray-900/60 z-20 flex items-end'>
+        <div className='text-white text-xl text-center w-full p-2'>{currentPoster.title}</div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Banner
+export default Banner;
