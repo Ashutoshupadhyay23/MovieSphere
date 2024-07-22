@@ -118,7 +118,7 @@ const Watchlist = ({ watchlist, setWatchList }) => {
                   <td>{genreIds[movieObj.genre_ids[0]]}</td>
 
                   <td className='text-red-700'>
-                    <i className="fa-duotone fa-solid fa-trash hover:cursor-pointer"
+                    <i className="fa-duotone fa-solid fa-trash hover:cursor-pointer text-blue-500"
                       onClick={() => handleDelete(movieObj.id)}>
 
                     </i>
